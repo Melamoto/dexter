@@ -25,6 +25,7 @@
 import os
 import csv
 import shutil
+import pickle
 
 from dex.builder import run_external_build_script
 from dex.debugger.Debuggers import get_debugger_steps
@@ -89,8 +90,8 @@ class TestCase(object):
 
 class Tool(TestToolBase):
     """Run the specified DExTer test(s) with the specified compiler and linker
-    options and produce dextIR output as a JSON file as well as printing out
-    the debugging experience score calculated by the DExTer heuristic.
+    options and produce a dextIR file as well as printing out the debugging
+    experience score calculated by the DExTer heuristic.
     """
 
     def __init__(self, *args, **kwargs):
@@ -146,9 +147,9 @@ class Tool(TestToolBase):
         with open(output_text_path, 'w') as fp:
             self.context.o.auto(str(steps), stream=Stream(fp))
 
-        output_json_path = '{}.json'.format(test_results_path)
-        with open(output_json_path, 'w') as fp:
-            fp.write(steps.as_json)
+        output_dextIR_path = '{}.dextIR'.format(test_results_path)
+        with open(output_dextIR_path, 'wb') as fp:
+            pickle.dump(steps, fp)
 
         try:
             heuristic = Heuristic(self.context, steps)
