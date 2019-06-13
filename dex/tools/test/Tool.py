@@ -24,6 +24,7 @@
 
 import os
 import csv
+from shutil import copyfile
 
 from dex.builder import run_external_build_script
 from dex.debugger.Debuggers import get_debugger_steps
@@ -32,6 +33,7 @@ from dex.tools import TestToolBase
 from dex.utils.Exceptions import DebuggerException
 from dex.utils.Exceptions import BuildScriptException, HeuristicException
 from dex.utils.PrettyOutputBase import Stream
+from dex.dextIR import BuilderIR
 
 
 class TestCase(object):
@@ -105,21 +107,29 @@ class Tool(TestToolBase):
         if os.path.split(test_name)[-1] == '.':
             test_name = os.path.basename(subdir)
 
-        compiler_options = [options.cflags for _ in options.source_files]
-        linker_options = options.ldflags
-        try:
-            _, _, builderIR = run_external_build_script(
-                self.context,
-                script_path=self.build_script,
-                source_files=options.source_files,
-                compiler_options=compiler_options,
-                linker_options=linker_options,
-                executable_file=options.executable)
-        except BuildScriptException as e:
-            test_case = TestCase(self.context, test_name, None, e)
-            self.context.o.auto(test_case)
-            self._test_cases.append(test_case)
-            return
+        if options.binary:
+            # Copy user's binary into the tmp working directory
+            copyfile(options.binary, options.executable)
+            builderIR = BuilderIR(
+                name='binary',
+                cflags=[options.binary],
+                ldflags='')
+        else:
+            compiler_options = [options.cflags for _ in options.source_files]
+            linker_options = options.ldflags
+            try:
+                _, _, builderIR = run_external_build_script(
+                    self.context,
+                    script_path=self.build_script,
+                    source_files=options.source_files,
+                    compiler_options=compiler_options,
+                    linker_options=linker_options,
+                    executable_file=options.executable)
+            except BuildScriptException as e:
+                test_case = TestCase(self.context, test_name, None, e)
+                self.context.o.auto(test_case)
+                self._test_cases.append(test_case)
+                return
 
         try:
             steps = get_debugger_steps(self.context)
