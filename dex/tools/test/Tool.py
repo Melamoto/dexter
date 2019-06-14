@@ -24,7 +24,7 @@
 
 import os
 import csv
-from shutil import copyfile
+import shutil
 
 from dex.builder import run_external_build_script
 from dex.debugger.Debuggers import get_debugger_steps
@@ -109,7 +109,7 @@ class Tool(TestToolBase):
 
         if options.binary:
             # Copy user's binary into the tmp working directory
-            copyfile(options.binary, options.executable)
+            shutil.copy(options.binary, options.executable)
             builderIR = BuilderIR(
                 name='binary',
                 cflags=[options.binary],
