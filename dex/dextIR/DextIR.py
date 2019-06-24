@@ -30,8 +30,8 @@ from dex.dextIR.DebuggerIR import DebuggerIR
 from dex.dextIR.StepIR import StepIR, StepKind
 
 
-def _step_kind_func(context, step):
-    if step.current_location.path in context.options.source_files:
+def _step_kind_func(source_paths, step):
+    if step.current_location.path in source_paths:
         return StepKind.FUNC
 
     if step.current_location.path is None:
@@ -76,7 +76,7 @@ class DextIR:
     def num_steps(self):
         return len(self.steps)
 
-    def new_step(self, context, step):
+    def new_step(self, step):
         assert isinstance(step, StepIR), type(step)
         if step.current_function is None:
             step.step_kind = StepKind.UNKNOWN
@@ -84,12 +84,12 @@ class DextIR:
             try:
                 prev_step = self.steps[-1]
             except IndexError:
-                step.step_kind = _step_kind_func(context, step)
+                step.step_kind = _step_kind_func(self.source_paths, step)
             else:
                 if prev_step.current_function is None:
                     step.step_kind = StepKind.UNKNOWN
                 elif prev_step.current_function != step.current_function:
-                    step.step_kind = _step_kind_func(context, step)
+                    step.step_kind = _step_kind_func(self.source_paths, step)
                 elif prev_step.current_location == step.current_location:
                     step.step_kind = StepKind.SAME
                 elif prev_step.current_location > step.current_location:

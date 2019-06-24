@@ -106,6 +106,10 @@ class DebuggerBase(object, metaclass=abc.ABCMeta):
             for line in range(1, num_lines + 1):
                 self.add_breakpoint(s, line)
 
+    def _update_frame_variables(self, step_info):
+        local_frame_values = self.get_frame_variables()
+        step_info.watches.update({value.expression: value for value in local_frame_values})
+
     def _update_step_watches(self, step_info):
         loc = step_info.current_location
         try:
@@ -140,8 +144,9 @@ class DebuggerBase(object, metaclass=abc.ABCMeta):
             step_info = self.get_step_info()
 
             if step_info.current_frame:
+                self._update_frame_variables(step_info)
                 self._update_step_watches(step_info)
-                self.steps.new_step(self.context, step_info)
+                self.steps.new_step(step_info)
 
             if (step_info.current_frame
                     and (step_info.current_location.path in
@@ -220,4 +225,8 @@ class DebuggerBase(object, metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def evaluate_expression(self, expression):
+        pass
+
+    @abc.abstractmethod
+    def get_frame_variables(self):
         pass

@@ -180,7 +180,15 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
 
     def evaluate_expression(self, expression):
         result = self._debugger.GetExpression(expression)
-        value = result.Value
+        return self._get_value_ir(expression, result)
+
+    def get_frame_variables(self):
+        result = self._debugger.CurrentStackFrame
+        assert result is not None
+        return [self._get_value_ir(local.Name, local) for local in result.Locals]
+
+    def _get_value_ir(self, name, debug_expression):
+        value = debug_expression.Value
 
         is_optimized_away = any(s in value for s in [
             'Variable is optimized away and not available',
@@ -194,13 +202,13 @@ class VisualStudio(DebuggerBase, metaclass=abc.ABCMeta):  # pylint: disable=abst
 
         # an optimized away value is still counted as being able to be
         # evaluated.
-        could_evaluate = (result.IsValidValue or is_optimized_away
+        could_evaluate = (debug_expression.IsValidValue or is_optimized_away
                           or is_irretrievable)
 
         return ValueIR(
-            expression=expression,
+            expression=name,
             value=value,
-            type_name=result.Type,
+            type_name=debug_expression.Type,
             error_string=None,
             is_optimized_away=is_optimized_away,
             could_evaluate=could_evaluate,
