@@ -7,7 +7,7 @@
 DEX_NOINLINE
 int FuncA(const int& a)
 {
-	return a * 10; // DexWatch('a')
+	return a * 10;
 }
 
 int main(int argc, char** argv)
@@ -15,9 +15,9 @@ int main(int argc, char** argv)
 	int val = 0;
 
 	for (int i = 0; i < argc + 2; ++i)
-		val += FuncA(i); // DexWatch('i', 'val')
+		val += FuncA(i);
 
-	return val; // DexWatch('val')
+	return val;
 }
 
 

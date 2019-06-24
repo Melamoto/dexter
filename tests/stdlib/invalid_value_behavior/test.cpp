@@ -36,10 +36,10 @@ int main()
 	{
 		const Foo& fooA = GetFoo();
 		const Foo& fooB = GetFoo();
-		val += pBar->Do(fooA, fooB); // DexWatch('i', 'val', 'fooA.a', 'fooA.b', 'fooB.a', 'fooB.b')
+		val += pBar->Do(fooA, fooB); // DexWatch('fooA.a', 'fooA.b', 'fooB.a', 'fooB.b')
 	}
 
-	return val; // DexWatch('val')
+	return val;
 }
 
 

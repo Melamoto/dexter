@@ -2,8 +2,8 @@
 
 int main() {
   float MyVar = get()[0];
-  if (MyVar)  // DexWatch('MyVar')
+  if (MyVar)
     return 1;
 }
 
-// DexExpectWatchValue('MyVar', '1.10000002')
+// DexExpectWatchValue('MyVar', '1.10000002', on_line=5)

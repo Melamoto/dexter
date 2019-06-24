@@ -8,10 +8,10 @@ void Fibonacci(int terms, int& total)
 
 	for (int i = 1; i <= terms; ++i)
 	{
-		int next = first + second; // DexWatch('i', 'first', 'second', 'total')
-		total += first;            // DexWatch('i', 'first', 'second', 'next', 'total')
-		first = second;            // DexWatch('i', 'first', 'second', 'next', 'total')
-		second = next;             // DexWatch('i', 'first', 'second', 'next', 'total')
+		int next = first + second;
+		total += first;
+		first = second;
+		second = next;
 	}
 }
 

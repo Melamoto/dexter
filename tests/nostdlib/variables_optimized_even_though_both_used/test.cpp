@@ -15,7 +15,7 @@ struct Foo
 	{
 		double da = a - foo.a;
 		double db = b - foo.b;
-		return sqrt(da * da + db * db); // DexWatch('foo', 'a', 'b', 'da', 'db')
+		return sqrt(da * da + db * db); // DexWatch('a', 'b')
 	}
 };
 
@@ -23,7 +23,7 @@ int main()
 {
 	Foo foo1 = { 12.3, 24.9 };
 	Foo foo2 = { 90.7, 3.1 };
-	return foo1.FooBar(foo2); // DexWatch('foo1', 'foo2')
+	return foo1.FooBar(foo2);
 }
 
 

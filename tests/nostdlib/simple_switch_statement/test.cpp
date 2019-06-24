@@ -11,13 +11,13 @@ int calculate_result(const char* buffer)
 		switch (c)
 		{
 		case 'A':
-			capa++; // DexWatch('c', 'capa', 'lettera', 'nota')
+			capa++; // DexWatch('c')
 			break;
 		case 'a':
-			lettera++; // DexWatch('c', 'capa', 'lettera', 'nota')
+			lettera++; // DexWatch('c')
 			break;
 		default:
-			nota++; // DexWatch('c', 'capa', 'lettera', 'nota')
+			nota++; // DexWatch('c')
 		}
 	}
 
@@ -27,7 +27,7 @@ int calculate_result(const char* buffer)
 int main() {
 		const char* buffer = "Any character stream";
 		int result = calculate_result(buffer);
-		result++;  // DexWatch('result')
+		result++;
 		return result;
 	}
 

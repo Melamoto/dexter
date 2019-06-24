@@ -27,7 +27,7 @@ public:
 	{
 		m_pBar1->Do();
 		m_pBar2->Do();
-		return a * 10; // DexWatch('a', 'm_pBar1 != 0', 'm_pBar2 != 0')
+		return a * 10; // DexWatch('m_pBar1 != 0', 'm_pBar2 != 0')
 	}
 
 private:

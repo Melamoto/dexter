@@ -4,7 +4,7 @@ int main()
 
     for (int i = 0; i < 127; ++i)
     {
-        aiSizes[i] = i; // DexWatch('i')
+        aiSizes[i] = i;
     }
     return aiSizes[12];  // DexWatch('aiSizes[0]', 'aiSizes[126]')
 }

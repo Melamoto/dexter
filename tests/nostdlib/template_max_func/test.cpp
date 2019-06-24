@@ -8,7 +8,7 @@ template <typename T>
 DEX_NOINLINE
 T const& Max(T const& a, T const& b)
 {
-	return a < b ? b : a; // DexWatch('a', 'b')
+	return a < b ? b : a;
 }
 
 int main(int argc, char** argv)
@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 	int i2 = 11;
 	int i3 = 56;
 
-	return Max(i0, i1) + Max(i2, i3); // DexWatch('i0', 'i1', 'i2', 'i3')
+	return Max(i0, i1) + Max(i2, i3);
 }
 
 

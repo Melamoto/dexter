@@ -4,7 +4,7 @@ int main()
 {
 	int total = 0;
 	Fibonacci(5, total);
-	return total; // DexWatch('total')
+	return total;
 }
 
 

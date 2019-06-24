@@ -8,9 +8,9 @@ DEX_NOINLINE
 int CalculatePower(int base, int power)
 {
 	if (power == 1)
-		return 1; // DexWatch('base', 'power')
+		return 1;
 
-	return base * CalculatePower(base, power - 1); // DexWatch('base', 'power')
+	return base * CalculatePower(base, power - 1);
 }
 
 int main(int argc, char** argv)

@@ -54,10 +54,10 @@ The sample test case (tests/nostdlib/fibonacci) looks like this:
 
         for (int i = 0; i < terms; ++i)
         {
-            int next = first + second; // DexWatch('i', 'first', 'second', 'total')
-            total += first;            // DexWatch('i', 'first', 'second', 'total', 'next')
-            first = second;            // DexWatch('i', 'first', 'second', 'total', 'next')
-            second = next;             // DexWatch('i', 'first', 'second', 'total', 'next')
+            int next = first + second;
+            total += first;
+            first = second;
+            second = next;
         }
     }
 
@@ -65,7 +65,7 @@ The sample test case (tests/nostdlib/fibonacci) looks like this:
     {
         int total = 0;
         Fibonacci(5, total);
-        return total;         // DexWatch('total')
+        return total;
     }
 
     // DexExpectWatchValue('i',      '0', '1', '2', '3', '4', from_line=15, to_line=18)

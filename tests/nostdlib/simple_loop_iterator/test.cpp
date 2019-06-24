@@ -15,7 +15,7 @@ int main(int argc, char **) {
   range<0, 5> list;
   int total = 0;
   for (volatile auto elem : list)
-    total += elem * argc; // DexWatch('total', 'elem', 'argc')
+    total += elem * argc;
   return total;
 }
 

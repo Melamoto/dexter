@@ -19,9 +19,9 @@ struct Foo
 		int val = 1;
 
 		for (auto pFoo : vecFoos)
-			val += pFoo->Do(val); // DexWatch('pFoo != 0', 'val')
+			val += pFoo->Do(val); // DexWatch('pFoo != 0')
 
-		return val; // DexWatch('val', '&vecFoos != 0')
+		return val; // DexWatch('&vecFoos != 0')
 	}
 };
 
@@ -35,9 +35,9 @@ int main()
 	int val = 0;
 
 	for (auto pFoo : vecFoos)
-		val += pFoo->Bar(vecFoos); // DexWatch('pFoo != 0', 'val')
+		val += pFoo->Bar(vecFoos); // DexWatch('pFoo != 0')
 
-	return val; // DexWatch('val')
+	return val;
 }
 
 

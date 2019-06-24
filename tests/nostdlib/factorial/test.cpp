@@ -6,12 +6,12 @@
 
 DEX_NOINLINE
 unsigned long Factorial(int n) {
-	volatile unsigned long fac = 1; // DexWatch('n')
+	volatile unsigned long fac = 1;
 
 	for (int i = 1; i <= n; ++i)
-		fac *= i; // DexWatch('i', 'n', 'fac')
+		fac *= i;
 
-	return fac; // DexWatch('n', 'fac')
+	return fac;
 }
 
 int main()

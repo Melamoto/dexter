@@ -17,15 +17,15 @@ void SelectionSort(int arr[], int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		int min = i; // DexWatch('i', 'n')
+		int min = i;
 
 		for (int j = i + 1; j < n; j++)
 		{
-			if (arr[min] > arr[j]) // DexWatch('j', 'min', 'n', 'arr[min]', 'arr[j]')
+			if (arr[min] > arr[j]) // DexWatch('arr[min]', 'arr[j]')
 				min = j;
 		}
 
-		Swap(&arr[min], &arr[i]); // DexWatch('min', 'n', 'arr[min]', 'arr[i]')
+		Swap(&arr[min], &arr[i]); // DexWatch('arr[min]', 'arr[i]')
 	}
 }
 

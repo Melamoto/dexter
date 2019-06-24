@@ -12,7 +12,7 @@ struct Foo
 	DEX_NOINLINE
 	int Do(const int& val)
 	{
-		return val * 2; // DexWatch('val')
+		return val * 2;
 	}
 
 	DEX_NOINLINE
@@ -21,9 +21,9 @@ struct Foo
 		int val = 0;
 
 		for (auto spFoo : vecFoos)
-			val += spFoo->Do(val); // DexWatch('&vecFoos != 0', '&spFoo != 0', 'val')
+			val += spFoo->Do(val); // DexWatch('&vecFoos != 0', '&spFoo != 0')
 
-		return val; // DexWatch('val')
+		return val;
 	}
 };
 
@@ -32,14 +32,14 @@ int main()
 	std::vector<std::shared_ptr<Foo>> vecFoos;
 
 	for (int i = 0; i < 2; i++)
-		vecFoos.push_back(std::make_shared<Foo>()); // DexWatch('&vecFoos != 0', 'i')
+		vecFoos.push_back(std::make_shared<Foo>()); // DexWatch('&vecFoos != 0')
 
 	int val = 0;
 
 	for (auto spFoo : vecFoos)
-		val += spFoo->Bar(vecFoos); // DexWatch('&vecFoos != 0', '&spFoo != 0', 'val')
+		val += spFoo->Bar(vecFoos); // DexWatch('&vecFoos != 0', '&spFoo != 0')
 
-	return val; // DexWatch('val')
+	return val;
 }
 
 

@@ -23,10 +23,10 @@ int main()
 	{
 		const Foo& fooA = { 10, 10 };
 		const Foo& fooB = { 20, 20 };
-		val += Bar(fooA, fooB); // DexWatch('val', 'fooA.a', 'fooA.b', 'fooB.a', 'fooB.b')
+		val += Bar(fooA, fooB); // DexWatch('fooA.a', 'fooA.b', 'fooB.a', 'fooB.b')
 	}
 
-	return val; // DexWatch('val')
+	return val;
 }
 
 

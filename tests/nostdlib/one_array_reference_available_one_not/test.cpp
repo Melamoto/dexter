@@ -9,7 +9,7 @@ struct Foo
 	DEX_NOINLINE
 	int Do(const int& val)
 	{
-		return val * 10; // DexWatch('val')
+		return val * 10;
 	}
 };
 

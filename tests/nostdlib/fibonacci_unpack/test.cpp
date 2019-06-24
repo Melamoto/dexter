@@ -13,19 +13,19 @@ void Fibonacci(int terms, int& total)
 
 	for (int i = 0; i < terms; ++i)
 	{
-		int next = first + second; // DexWatch('i', 'first', 'second', 'localtotal')
-		localtotal += first;       // DexWatch('i', 'first', 'second', 'localtotal', 'next')
-		first = second;            // DexWatch('i', 'first', 'second', 'localtotal', 'next')
-		second = next;             // DexWatch('i', 'first', 'second', 'localtotal', 'next')
+		int next = first + second;
+		localtotal += first;
+		first = second;
+		second = next;
 	}
-	total = localtotal;          // DexWatch('localtotal')
+	total = localtotal;
 }
 
 int main()
 {
 	int total = 0;
 	Fibonacci(5, total);
-	return total;  								// DexWatch('total')
+	return total;
 }
 
 // DexExpectWatchValue('i',          '0', '1', '2', '3', '4', from_line=16, to_line=19)
