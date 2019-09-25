@@ -98,14 +98,8 @@ At the end of the test is the following line:
 
     DexExpectStepKind('FUNC_EXTERNAL', 0)
 
-Each time the debugger steps, DExTer classifies the 'kind'. For example:
-* `FORWARD` - meaning the new source location is later in the same function
-* `BACKWARD` - meaning the new source location is earlier in the same function
-* `FUNC` - meaning the new location is in a different function
-* `FUNC_EXTERNAL` - meaning the new location is not within the test file.
-
-The [DexExpectStepKind][3] command indicates that we do not expect the debugger to
-step outside of the test file.
+This [DexExpectStepKind][3] command indicates that we do not expect the debugger
+to step into a file outside of the test directory.
 
 [1]: Commands.md#DexLabel
 [2]: Commands.md#DexExpectWatchValue
@@ -123,29 +117,29 @@ The detailed report is enabled by `-v` and shows a breakdown of the information 
 
     ## BEGIN ##
     [1, "main", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 23, 1, "BREAKPOINT", "FUNC", {}]
-    [2, "main", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 24, 1, "BREAKPOINT", "FORWARD", {}]
-    [3, "main", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 25, 1, "BREAKPOINT", "FORWARD", {}]
+    [2, "main", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 24, 1, "BREAKPOINT", "VERTICAL_FORWARD", {}]
+    [3, "main", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 25, 1, "BREAKPOINT", "VERTICAL_FORWARD", {}]
     .   [4, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "FUNC", {}]
-    .   [5, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [6, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "BACKWARD", {}]
-    .   [7, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [8, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [9, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "BACKWARD", {"i": "Variable is optimized away and not available.", "second": "1", "total": "0", "first": "0"}]
-    .   [10, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "BACKWARD", {}]
-    .   [11, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [12, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "BACKWARD", {"i": "Variable is optimized away and not available.", "second": "1", "total": "0", "first": "1"}]
-    .   [13, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "BACKWARD", {}]
-    .   [14, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [15, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "BACKWARD", {"i": "Variable is optimized away and not available.", "second": "2", "total": "0", "first": "1"}]
-    .   [16, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "BACKWARD", {}]
-    .   [17, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [18, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "BACKWARD", {"i": "Variable is optimized away and not available.", "second": "3", "total": "0", "first": "2"}]
-    .   [19, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "BACKWARD", {}]
-    .   [20, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [21, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "BACKWARD", {"i": "Variable is optimized away and not available.", "second": "5", "total": "0", "first": "3"}]
-    .   [22, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "BACKWARD", {}]
-    .   [23, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
-    .   [24, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 20, 1, "BREAKPOINT", "FORWARD", {}]
+    .   [5, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [6, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {}]
+    .   [7, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [8, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [9, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {"i": "Variable is optimized away and not available.", "second": "1", "total": "0", "first": "0"}]
+    .   [10, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {}]
+    .   [11, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [12, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {"i": "Variable is optimized away and not available.", "second": "1", "total": "0", "first": "1"}]
+    .   [13, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {}]
+    .   [14, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [15, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {"i": "Variable is optimized away and not available.", "second": "2", "total": "0", "first": "1"}]
+    .   [16, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {}]
+    .   [17, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [18, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {"i": "Variable is optimized away and not available.", "second": "3", "total": "0", "first": "2"}]
+    .   [19, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {}]
+    .   [20, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [21, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 15, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {"i": "Variable is optimized away and not available.", "second": "5", "total": "0", "first": "3"}]
+    .   [22, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 13, 1, "BREAKPOINT", "VERTICAL_BACKWARD", {}]
+    .   [23, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 16, 1, "BREAKPOINT", "VERTICAL_FORWARD", {"i": "Variable is optimized away and not available.", "next": "Variable is optimized away and not available.", "second": "Variable is optimized away and not available.", "total": "0", "first": "Variable is optimized away and not available."}]
+    .   [24, "Fibonacci", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 20, 1, "BREAKPOINT", "VERTICAL_FORWARD", {}]
     [25, "main", "c:\\dexter\\tests\\nostdlib\\fibonacci\\test.cpp", 26, 1, "BREAKPOINT", "FUNC", {"total": "7"}]
     ## END (25 steps) ##
 
@@ -261,8 +255,7 @@ shows that for `first` the expected values 0, 1, 2 and 3 were seen, 5 was not.  
 
 ## Writing new test cases
 
-Each test requires a `test.cfg` file.  Currently the contents of this file are not read, but its presence is used to determine the root directory of a test. In the future, configuration variables for the test such as supported language modes may be stored in this file.  Once a test has been written with DexWatch comments added, the `annotate-expected-values` tool can be used in conjunction with a DextIR file (generated by running `dexter.py test` on an unoptimized build) to automatically generate `DexExpectWatchValue` and `DexExpectStepKind` checks for the file based on the observed behavior.  The generated commands may need some adjustments but this should
-provide a good starting point.
+Each test requires a `test.cfg` file.  Currently the contents of this file are not read, but its presence is used to determine the root directory of a test. In the future, configuration variables for the test such as supported language modes may be stored in this file. Use the various [commands](Commands.md) to encode debugging expectations.
 
 ## Additional tools
 
@@ -312,11 +305,7 @@ For clang-based compilers, the `clang-opt-bisect` tool can be used to get a brea
 
 ## Contributing to DExTer
 
-Before submitting any contributions please ensure that all tests and style/lint checks still pass.
-
-The command line to install the packages required for style and lint checking is:
-
-    <python-executable> -m pip install pycodestyle pylama pylint yapf
+Before submitting any contributions please ensure that all tests still pass.
 
 You will need [llvm-lit][0]. It can be built with llvm or installed as `lit` by
 running:
